@@ -1,7 +1,7 @@
 "use client";
 
-// import { motion } from "framer-motion";
 import { Quote, Target, Lightbulb } from "lucide-react";
+import { getImagePath } from "@/lib/paths";
 
 export default function AboutPage() {
     const leadership = [
@@ -17,7 +17,7 @@ export default function AboutPage() {
             role: "Leadership Team",
             qualifications: "MBBS & M.S (Otorhinolaryngology)",
             bio: "Senior Resident at Vivekananda Medical College. An enthusiastic doctor, counselor, and entrepreneur aiming to bring health and wellness to the community.",
-            image: "/images/staff/dr-vaibhavi.jpg"
+            image: getImagePath("/images/staff/dr-vaibhavi.jpg")
         },
         {
             name: "Mr. Prahlad K R",
@@ -33,7 +33,10 @@ export default function AboutPage() {
             {/* Hero Section */}
             <section className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center bg-primary text-primary-foreground">
                 <div className="absolute inset-0 bg-black/40 z-0">
-                    <div className="w-full h-full bg-[url('/images/facilities/kids-play-area.jpg')] bg-cover bg-center" />
+                    <div
+                        className="w-full h-full bg-cover bg-center"
+                        style={{ backgroundImage: `url(${getImagePath('/images/facilities/kids-play-area.jpg')})` }}
+                    />
                 </div>
                 <div className="container relative z-10 px-4 text-center">
                     <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">About Our School</h1>
@@ -58,7 +61,10 @@ export default function AboutPage() {
                         </div>
                         <div className="md:w-1/2 relative">
                             <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-2xl bg-muted">
-                                <div className="w-full h-full bg-[url('/images/facilities/auditorium.jpg')] bg-cover bg-center" />
+                                <div
+                                    className="w-full h-full bg-cover bg-center"
+                                    style={{ backgroundImage: `url(${getImagePath('/images/facilities/auditorium.jpg')})` }}
+                                />
                             </div>
                             <div className="absolute -bottom-6 -left-6 bg-secondary text-secondary-foreground p-6 rounded-lg shadow-xl hidden md:block">
                                 <p className="font-serif text-3xl font-bold">1988</p>

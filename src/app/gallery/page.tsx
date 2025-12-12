@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getImagePath } from "@/lib/paths";
 
 export default function GalleryPage() {
     const [activeCategory, setActiveCategory] = useState("all");
@@ -15,12 +16,14 @@ export default function GalleryPage() {
     ];
 
     const photos = [
-        { id: 1, category: "campus", src: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop", title: "School Building" },
-        { id: 2, category: "academic", src: "https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=2072&auto=format&fit=crop", title: "Classroom Session" },
-        { id: 3, category: "sports", src: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=2029&auto=format&fit=crop", title: "Sports Day" },
-        { id: 4, category: "events", src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop", title: "Annual Day" },
-        { id: 5, category: "academic", src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop", title: "Science Lab" },
-        { id: 6, category: "campus", src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop", title: "Library" },
+        { id: 1, category: "campus", src: getImagePath("/images/hero/slide-1.jpg"), title: "Main Campus" },
+        { id: 2, category: "academic", src: getImagePath("/images/facilities/science-lab.jpg"), title: "Science Laboratory" },
+        { id: 3, category: "sports", src: getImagePath("/images/events/sports-day.jpg"), title: "Annual Sports Day" },
+        { id: 4, category: "events", src: getImagePath("/images/facilities/auditorium.jpg"), title: "School Auditorium" },
+        { id: 5, category: "campus", src: getImagePath("/images/facilities/library.jpg"), title: "Library" },
+        { id: 6, category: "sports", src: getImagePath("/images/facilities/basketball-court.jpg"), title: "Basketball Court" },
+        { id: 7, category: "campus", src: getImagePath("/images/facilities/school-bus.jpg"), title: "Transportation" },
+        { id: 8, category: "events", src: getImagePath("/images/events/christmas.jpg"), title: "Christmas Celebration" },
     ];
 
     const filteredPhotos = activeCategory === "all"
@@ -48,8 +51,8 @@ export default function GalleryPage() {
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === cat.id
-                                        ? "bg-primary text-primary-foreground"
-                                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                                    ? "bg-primary text-primary-foreground"
+                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
                                     }`}
                             >
                                 {cat.label}

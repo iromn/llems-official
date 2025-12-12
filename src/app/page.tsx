@@ -5,26 +5,29 @@ import Link from "next/link";
 import { ArrowRight, GraduationCap, Users, Trophy, BookOpen, Monitor, Leaf, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { getImagePath } from "@/lib/paths";
+
 const slides = [
   {
     id: 1,
-    image: "/images/hero/slide-1.jpg",
+    image: getImagePath("/images/hero/slide-1.jpg"),
     title: "Empowering Future Leaders",
     subtitle: "Nurturing holistic development since 1988"
   },
   {
     id: 2,
-    image: "/images/facilities/science-lab.jpg",
+    image: getImagePath("/images/facilities/science-lab.jpg"),
     title: "Academic Excellence",
     subtitle: "100% Results & Modern Curriculum powered by LEAD"
   },
   {
     id: 3,
-    image: "/images/events/sports-day.jpg",
+    image: getImagePath("/images/events/sports-day.jpg"),
     title: "Beyond Classrooms",
     subtitle: "State-of-the-art Sports & Arts Facilities"
   }
 ];
+
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -235,9 +238,9 @@ export default function Home() {
               <video
                 controls
                 className="w-full h-full object-cover"
-                poster="/images/facilities/auditorium.jpg"
+                poster={getImagePath("/images/facilities/auditorium.jpg")}
               >
-                <source src="/videos/school-tour.mp4" type="video/mp4" />
+                <source src={getImagePath("/videos/school-tour.mp4")} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
