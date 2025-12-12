@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getImagePath } from "@/lib/paths";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -12,7 +13,7 @@ export default function Footer() {
                         <div className="flex items-center gap-3">
                             <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-white/20">
                                 <Image
-                                    src="/logo.webp"
+                                    src={getImagePath("/logo.webp")}
                                     alt="Little Lilli School Logo"
                                     fill
                                     className="object-contain"

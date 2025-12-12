@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getImagePath } from "@/lib/paths";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -27,7 +28,7 @@ export default function Navbar() {
                     <Link href="/" className="flex items-center gap-2">
                         <div className="relative h-10 w-10 overflow-hidden rounded-full">
                             <Image
-                                src="/logo.webp"
+                                src={getImagePath("/logo.webp")}
                                 alt="Little Lilli School Logo"
                                 fill
                                 className="object-contain"

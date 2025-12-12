@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { getImagePath } from "@/lib/paths";
 
 interface Teacher {
     id: number;
@@ -58,7 +59,7 @@ export default function FacultyPage() {
                             <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                                 {teacher.image ? (
                                     <Image
-                                        src={teacher.image}
+                                        src={getImagePath(teacher.image)}
                                         alt={teacher.name}
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
