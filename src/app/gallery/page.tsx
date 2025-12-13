@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getImagePath } from "@/lib/paths";
-import { ChevronDown, Play } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 type GalleryItem = {
     id: number;

@@ -1,10 +1,19 @@
 "use client";
 
-import { Monitor, FlaskConical, Book, Bus, Dumbbell, LayoutGrid } from "lucide-react";
+import { FlaskConical, Book, Bus, Dumbbell, LayoutGrid } from "lucide-react";
 import { getImagePath } from "@/lib/paths";
 
+interface Facility {
+    title: string;
+    icon: React.ReactNode;
+    description: string;
+    features: string[];
+    image?: string;
+    images?: string[];
+}
+
 export default function FacilitiesPage() {
-    const facilities = [
+    const facilities: Facility[] = [
         {
             title: "Academic Infrastructure",
             icon: <LayoutGrid className="h-6 w-6" />,
