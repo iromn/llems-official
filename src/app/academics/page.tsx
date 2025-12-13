@@ -3,6 +3,8 @@
 import { BookOpen, GraduationCap, Users, Award, Brain, Microscope } from "lucide-react";
 import Link from "next/link";
 
+import { getImagePath } from "@/lib/paths";
+
 export default function AcademicsPage() {
     const levels = [
         {
@@ -31,9 +33,15 @@ export default function AcademicsPage() {
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
             <section className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center bg-primary text-primary-foreground">
-                <div className="absolute inset-0 bg-black/40 z-0">
-                    <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop')] bg-cover bg-center" />
-                </div>
+                {/* Background Image Layer */}
+                <div
+                    className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
+                    style={{ backgroundImage: `url(${getImagePath('/images/academics/banner.jpg')})` }}
+                />
+                {/* Overlay Layer */}
+                <div className="absolute inset-0 bg-black/50 z-0" />
+
+                {/* Content Layer */}
                 <div className="container relative z-10 px-4 text-center">
                     <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Academic Excellence</h1>
                     <div className="h-1 w-20 bg-secondary mx-auto rounded-full" />
@@ -103,7 +111,10 @@ export default function AcademicsPage() {
                         <div className="md:w-1/2">
                             <div className="relative rounded-xl overflow-hidden shadow-xl aspect-square md:aspect-[4/3]">
                                 <div className="absolute inset-0 bg-primary/20" />
-                                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1427504743055-b72976e3ac-4b?q=80&w=2066&auto=format&fit=crop')] bg-cover bg-center" />
+                                <div
+                                    className="w-full h-full bg-cover bg-center"
+                                    style={{ backgroundImage: `url(${getImagePath('/images/academics/smart-rooms.jpg')})` }}
+                                />
                                 <div className="absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-border">
                                     <div className="flex items-center justify-between">
                                         <div>

@@ -10,7 +10,7 @@ export default function AboutPage() {
             role: "Leadership Team",
             qualifications: "B.Tech, M.Tech & Ph.D (IIT Madras)",
             bio: "Senior Research Scientist at Bosch Rexroth with 10+ years in R&D. Gold Medalist from NIT Allahabad. Also a passionate filmmaker with 5 short films to his credit.",
-            image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+            image: getImagePath("/images/staff/dr-vishnudas.jpg")
         },
         {
             name: "Dr. Vaibhavi K R",
@@ -20,11 +20,11 @@ export default function AboutPage() {
             image: getImagePath("/images/staff/dr-vaibhavi.jpg")
         },
         {
-            name: "Mr. Prahlad K R",
+            name: "Mr. Prahalad K R",
             role: "Leadership Team",
             qualifications: "B.Tech, M.Tech & M.E (Manipal)",
             bio: "Specialist in VLSI Design and Control Systems. Published multiple technical papers and has a strong background in academic excellence and athletics.",
-            image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop"
+            image: getImagePath("/images/staff/mr-prahlad.jpg")
         }
     ];
 
@@ -32,12 +32,15 @@ export default function AboutPage() {
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
             <section className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center bg-primary text-primary-foreground">
-                <div className="absolute inset-0 bg-black/40 z-0">
-                    <div
-                        className="w-full h-full bg-cover bg-center"
-                        style={{ backgroundImage: `url(${getImagePath('/images/facilities/kids-play-area.jpg')})` }}
-                    />
-                </div>
+                {/* Background Image Layer */}
+                <div
+                    className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
+                    style={{ backgroundImage: `url(${getImagePath('/images/about/new-banner.jpg')})` }}
+                />
+                {/* Overlay Layer */}
+                <div className="absolute inset-0 bg-black/50 z-0" />
+
+                {/* Content Layer */}
                 <div className="container relative z-10 px-4 text-center">
                     <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">About Our School</h1>
                     <div className="h-1 w-20 bg-secondary mx-auto rounded-full" />
@@ -63,7 +66,7 @@ export default function AboutPage() {
                             <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-2xl bg-muted">
                                 <div
                                     className="w-full h-full bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${getImagePath('/images/facilities/auditorium.jpg')})` }}
+                                    style={{ backgroundImage: `url(${getImagePath('/images/about/school-building.jpg')})` }}
                                 />
                             </div>
                             <div className="absolute -bottom-6 -left-6 bg-secondary text-secondary-foreground p-6 rounded-lg shadow-xl hidden md:block">
@@ -133,12 +136,12 @@ export default function AboutPage() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         {leadership.map((person, index) => (
                             <div key={index} className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-xl transition-all group">
-                                <div className="h-64 overflow-hidden">
+                                <div className="h-96 overflow-hidden">
                                     <div
-                                        className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full bg-cover bg-top group-hover:scale-105 transition-transform duration-500"
                                         style={{ backgroundImage: `url(${person.image})` }}
                                     />
                                 </div>

@@ -14,16 +14,16 @@ interface Teacher {
 }
 
 const teachers: Teacher[] = [
-    { id: 1, name: "Anitha", qualification: "B.Com", role: "Administrator", experience: "30 Years" },
-    { id: 2, name: "Pushparaj B", qualification: "MA, B.Ed", role: "Academic Director", experience: "25 Years" },
-    { id: 3, name: "Gopinath", qualification: "MA, B.Ed", role: "English Faculty", experience: "20 Years" },
+    { id: 1, name: "Anitha", qualification: "B.Com", role: "Administrator", experience: "30 Years", image: "/images/faculty/anitha.jpg" },
+    { id: 2, name: "Pushparaj B", qualification: "MA, B.Ed", role: "Academic Director", experience: "25 Years", image: "/images/faculty/pushparaj-b.jpg" },
+    { id: 3, name: "Gopinath", qualification: "MA, B.Ed", role: "English Faculty", experience: "20 Years", image: "/images/faculty/gopinath.jpg" },
     { id: 4, name: "Jeeta D'Souza", qualification: "BA, B.Ed, K.TET", role: "EVS & Social Science", experience: "10 Years", image: "/images/faculty/jeeta-dsouza.jpg" },
     { id: 5, name: "Shakuntala", qualification: "TTC & BA", role: "Hindi Faculty", experience: "10 Years", image: "/images/faculty/shakuntala.jpg" },
     { id: 6, name: "Mohan", qualification: "Diploma", role: "Drawing Faculty", experience: "10 Years", image: "/images/faculty/mohan.jpg" },
     { id: 7, name: "Savitha M", qualification: "D.El.Ed, MA, K.TET", role: "Hindi Faculty", experience: "9 Years", image: "/images/faculty/savitha-m.jpg" },
     { id: 8, name: "Meena M", qualification: "BA, B.Ed", role: "Malayalam Faculty", experience: "7 Years", image: "/images/faculty/meena-m.jpg" },
     { id: 9, name: "Princy", qualification: "MA, B.Ed", role: "Social Science", experience: "5 Years", image: "/images/faculty/princy.jpg" },
-    { id: 10, name: "Chaitra", qualification: "Diploma", role: "Physical Education", experience: "5 Years" },
+    { id: 10, name: "Chaitra", qualification: "Diploma", role: "Physical Education", experience: "5 Years", image: "/images/faculty/chaitra.jpg" },
     { id: 11, name: "Akshatha V", qualification: "M.Com, B.Ed", role: "English & Maths", experience: "4 Years", image: "/images/faculty/akshatha-v.jpg" },
     { id: 12, name: "Divyashree", qualification: "B.Com, M.Com", role: "English, Maths, EVS", experience: "2 Years", image: "/images/faculty/divyashree.jpg" },
     { id: 13, name: "Chaithra", qualification: "B.Com", role: "L/KG Faculty", experience: "2 Years" },
@@ -33,6 +33,7 @@ const teachers: Teacher[] = [
     { id: 17, name: "Yashwitha", qualification: "BA, B.Ed", role: "Hindi & Computer", experience: "1 Year", image: "/images/faculty/yashwitha.jpg" },
     { id: 18, name: "Nischitha D", qualification: "BA, B.Ed", role: "Kannada Faculty", experience: "1 Year", image: "/images/faculty/nischitha-d.jpg" },
     { id: 19, name: "Kadeejath Afnaz", qualification: "NTTC", role: "KG Section", experience: "1 Year", image: "/images/faculty/kadeejath-afnaz.jpg" },
+    { id: 20, name: "Saraswati", qualification: "Qualification", role: "Faculty", experience: "Experience", image: "/images/faculty/saraswati.jpg" },
 ];
 
 export default function FacultyPage() {

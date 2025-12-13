@@ -6,6 +6,7 @@ import { ArrowRight, GraduationCap, Users, Trophy, BookOpen, Monitor, Leaf, Chev
 import { motion, AnimatePresence } from "framer-motion";
 
 import { getImagePath } from "@/lib/paths";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 
 const slides = [
   {
@@ -245,6 +246,21 @@ export default function Home() {
               </video>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Voices of Our Community</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded-full" />
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+              Hear from our students, parents, and faculty about their journey with Little Lilli.
+            </p>
+          </div>
+
+          <TestimonialCarousel />
         </div>
       </section>
 
