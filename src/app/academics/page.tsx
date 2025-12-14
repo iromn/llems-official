@@ -137,8 +137,8 @@ export default function AcademicsPage() {
 
             {/* Methodology & Results */}
             <section className="py-24 bg-muted/30">
-                <div className="container px-4 md:px-6 mx-auto">
-                    <div className="flex flex-col lg:flex-row gap-16 items-center">
+                <div className="container px-4 md:px-6 mx-auto overflow-hidden">
+                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
                         <motion.div
                             className="lg:w-1/2 space-y-8"
                             initial="hidden"
@@ -200,8 +200,8 @@ export default function AcademicsPage() {
                                         />
                                     </div>
 
-                                    <div className="absolute bottom-8 left-8 right-8 z-20">
-                                        <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-white">
+                                    <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 z-20">
+                                        <div className="bg-white/10 backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 text-white">
                                             <div className="flex items-center justify-between">
                                                 <div>
                                                     <p className="text-xs font-bold uppercase tracking-wider mb-1 text-secondary">Student-Teacher Ratio</p>

@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen font-sans">
       {/* Hero Carousel Section */}
-      <section className="relative w-full h-[650px] md:h-[750px] flex items-center justify-center overflow-hidden bg-primary text-primary-foreground">
+      <section className="relative w-full h-[600px] md:h-[750px] flex items-center justify-center overflow-hidden bg-primary text-primary-foreground">
 
         {/* Carousel Backgrounds */}
         <AnimatePresence>
@@ -92,7 +92,7 @@ export default function Home() {
                   <div className="inline-block bg-secondary text-white px-3 py-1 text-sm font-bold uppercase tracking-wider mb-4 rounded-sm">
                     Welcome to Little Lilli
                   </div>
-                  <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
+                  <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
                     {slides[currentSlide].title}
                   </h1>
                   <p className="text-xl md:text-2xl text-white/90 font-light mb-8 drop-shadow-md border-l-4 border-secondary pl-4 max-w-xl">
@@ -165,20 +165,39 @@ export default function Home() {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="flex flex-col md:flex-row gap-16 items-center">
             <div className="md:w-1/2 relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-secondary/10 -z-10 rounded-full"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/5 -z-10 rounded-full"></div>
-              <div className="relative h-[500px] w-full">
-                <Image
+              {/* DESKTOP VERSION - Hidden on Mobile */}
+              <div className="hidden md:block relative w-full h-[500px]">
+                <div className="absolute -top-4 -left-4 w-24 h-24 bg-secondary/10 -z-10 rounded-full"></div>
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/5 -z-10 rounded-full"></div>
+                <div className="relative h-full w-full">
+                  <Image
+                    src={getImagePath("/images/home/inspiring-minds.webp")}
+                    alt="Students"
+                    fill
+                    className="rounded-lg shadow-2xl object-cover"
+                    sizes="50vw"
+                  />
+                </div>
+                <div className="absolute -bottom-8 -left-8 bg-white p-6 shadow-xl rounded-lg max-w-xs border-l-4 border-secondary">
+                  <p className="font-serif text-4xl font-bold text-primary mb-1">35+</p>
+                  <p className="text-muted-foreground uppercase text-sm tracking-wider">Years of Educational Excellence</p>
+                </div>
+              </div>
+
+              {/* MOBILE VERSION - Hidden on Desktop */}
+              <div className="block md:hidden relative w-full mb-12 h-[300px]">
+                {/* Using standard img tag with inline styles for maximum reliability */}
+                <img
                   src={getImagePath("/images/home/inspiring-minds.webp")}
                   alt="Students"
-                  fill
-                  className="rounded-lg shadow-2xl object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  className="rounded-lg shadow-lg relative z-0"
                 />
-              </div>
-              <div className="absolute -bottom-8 -left-8 bg-white p-6 shadow-xl rounded-lg max-w-xs hidden md:block border-l-4 border-secondary">
-                <p className="font-serif text-4xl font-bold text-primary mb-1">35+</p>
-                <p className="text-muted-foreground uppercase text-sm tracking-wider">Years of Educational Excellence</p>
+                {/* 35+ Years Box for Mobile */}
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white p-4 shadow-xl rounded-lg w-[90%] border-l-4 border-secondary z-10">
+                  <p className="font-serif text-3xl font-bold text-primary mb-1">35+</p>
+                  <p className="text-muted-foreground uppercase text-xs tracking-wider">Years of Educational Excellence</p>
+                </div>
               </div>
             </div>
             <div className="md:w-1/2 space-y-6">
@@ -225,7 +244,7 @@ export default function Home() {
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-primary mb-4">Why Choose Little Lilli?</h2>
             <div className="h-1 w-24 bg-secondary mx-auto rounded-full" />
             <p className="mt-6 text-muted-foreground max-w-2xl mx-auto text-lg">
-              A perfect ecosystem for your child's holistic growth.
+              A perfect ecosystem for your child&apos;s holistic growth.
             </p>
           </div>
 

@@ -63,7 +63,7 @@ export default function ContactPage() {
                     {[
                         { icon: <MapPin className="h-6 w-6" />, title: "Our Address", desc: ["Little Lilli English Medium School,", "Kumbla, Kasaragod,", "Kerala, India - 671321"], color: "text-red-500", bg: "bg-red-500/10" },
                         { icon: <Phone className="h-6 w-6" />, title: "Phone Support", desc: ["04998 215306", "+91 94474 38221"], color: "text-blue-500", bg: "bg-blue-500/10" },
-                        { icon: <Mail className="h-6 w-6" />, title: "Email Us", desc: ["littlelillikbl@gmail.com", "admissions@littlelilli.com"], color: "text-amber-500", bg: "bg-amber-500/10" },
+                        { icon: <Mail className="h-6 w-6" />, title: "Email Us", desc: ["LLSKSD@gmail.com"], color: "text-amber-500", bg: "bg-amber-500/10" },
                         { icon: <Clock className="h-6 w-6" />, title: "Office Hours", desc: ["Mon - Fri: 9:00 AM - 4:00 PM", "Sat: 9:00 AM - 1:00 PM"], color: "text-green-500", bg: "bg-green-500/10" }
                     ].map((item, idx) => (
                         <motion.div
@@ -97,30 +97,70 @@ export default function ContactPage() {
                             <h2 className="font-serif text-3xl font-bold mb-2 text-primary">Send us a Message</h2>
                             <p className="text-muted-foreground mb-8">Fill in the form below and we will get back to you shortly.</p>
 
-                            <form className="space-y-6">
+                            <form className="space-y-6" onSubmit={async (e) => {
+                                e.preventDefault();
+                                const form = e.target as HTMLFormElement;
+                                const formData = new FormData(form);
+                                const data = {
+                                    firstName: formData.get('firstName'),
+                                    lastName: formData.get('lastName'),
+                                    email: formData.get('email'),
+                                    subject: formData.get('subject'),
+                                    message: formData.get('message'),
+                                };
+
+                                try {
+                                    const res = await fetch('/llems-official/api/send-email', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({
+                                            to: 'LLSKSD@gmail.com', // Replace with admin email env var if needed
+                                            replyTo: data.email,
+                                            subject: `New Contact Enquiry: ${data.subject}`,
+                                            html: `
+                                                <h3>New Contact Form Submission</h3>
+                                                <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+                                                <p><strong>Email:</strong> ${data.email}</p>
+                                                <p><strong>Subject:</strong> ${data.subject}</p>
+                                                <p><strong>Message:</strong></p>
+                                                <p>${data.message}</p>
+                                            `
+                                        })
+                                    });
+                                    if (res.ok) {
+                                        alert('Message sent successfully!');
+                                        form.reset();
+                                    } else {
+                                        alert('Failed to send message. Please try again.');
+                                    }
+                                } catch (err) {
+                                    console.error(err);
+                                    alert('An error occurred.');
+                                }
+                            }}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <label className="text-sm font-bold text-foreground/80">First Name</label>
-                                        <input type="text" className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="John" />
+                                        <input name="firstName" type="text" required className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="John" />
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-sm font-bold text-foreground/80">Last Name</label>
-                                        <input type="text" className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="Doe" />
+                                        <input name="lastName" type="text" required className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="Doe" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-foreground/80">Email</label>
-                                    <input type="email" className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="john@example.com" />
+                                    <input name="email" type="email" required className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="john@example.com" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-foreground/80">Subject</label>
-                                    <input type="text" className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="General Enquiry" />
+                                    <input name="subject" type="text" required className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="General Enquiry" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-foreground/80">Message</label>
-                                    <textarea rows={5} className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all resize-none" placeholder="How can we help you?" />
+                                    <textarea name="message" rows={5} required className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all resize-none" placeholder="How can we help you?" />
                                 </div>
-                                <button className="w-full bg-secondary text-secondary-foreground font-bold py-4 rounded-lg hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                <button type="submit" className="w-full bg-secondary text-secondary-foreground font-bold py-4 rounded-lg hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
                                     Send Message <Send className="h-4 w-4" />
                                 </button>
                             </form>

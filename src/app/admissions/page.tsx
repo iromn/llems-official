@@ -24,13 +24,53 @@ const staggerContainer = {
 export default function AdmissionsPage() {
     const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setFormStatus("submitting");
-        // Simulate API call
-        setTimeout(() => {
-            setFormStatus("success");
-        }, 1500);
+
+        const form = e.target as HTMLFormElement;
+        const formData = new FormData(form);
+        const data = {
+            studentName: formData.get('studentName'),
+            grade: formData.get('grade'),
+            parentName: formData.get('parentName'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            message: formData.get('message'),
+        };
+
+        try {
+            const res = await fetch('/llems-official/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: 'LLSKSD@gmail.com', // Replace with env var in prod
+                    replyTo: data.email,
+                    subject: `New Admission Enquiry for Grade ${data.grade}: ${data.studentName}`,
+                    html: `
+                        <h3>New Admission Enquiry</h3>
+                        <p><strong>Student Name:</strong> ${data.studentName}</p>
+                        <p><strong>Grade:</strong> ${data.grade}</p>
+                        <p><strong>Parent Name:</strong> ${data.parentName}</p>
+                        <p><strong>Email:</strong> ${data.email}</p>
+                        <p><strong>Phone:</strong> ${data.phone}</p>
+                        <p><strong>Message:</strong></p>
+                        <p>${data.message}</p>
+                    `
+                })
+            });
+
+            if (res.ok) {
+                setFormStatus("success");
+            } else {
+                alert('Failed to submit enquiry. Please try again.');
+                setFormStatus("idle");
+            }
+        } catch (err) {
+            console.error(err);
+            alert('An error occurred.');
+            setFormStatus("idle");
+        }
     };
 
     const steps = [
@@ -211,6 +251,7 @@ export default function AdmissionsPage() {
                                                     <label htmlFor="studentName" className="text-sm font-bold text-foreground/80">Student Name</label>
                                                     <input
                                                         id="studentName"
+                                                        name="studentName"
                                                         type="text"
                                                         required
                                                         className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
@@ -221,6 +262,7 @@ export default function AdmissionsPage() {
                                                     <label htmlFor="grade" className="text-sm font-bold text-foreground/80">Applying For Grade</label>
                                                     <select
                                                         id="grade"
+                                                        name="grade"
                                                         required
                                                         className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
                                                     >
@@ -237,6 +279,7 @@ export default function AdmissionsPage() {
                                                 <label htmlFor="parentName" className="text-sm font-bold text-foreground/80">Parent/Guardian Name</label>
                                                 <input
                                                     id="parentName"
+                                                    name="parentName"
                                                     type="text"
                                                     required
                                                     className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
@@ -249,6 +292,7 @@ export default function AdmissionsPage() {
                                                     <label htmlFor="email" className="text-sm font-bold text-foreground/80">Email Address</label>
                                                     <input
                                                         id="email"
+                                                        name="email"
                                                         type="email"
                                                         required
                                                         className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
@@ -259,6 +303,7 @@ export default function AdmissionsPage() {
                                                     <label htmlFor="phone" className="text-sm font-bold text-foreground/80">Phone Number</label>
                                                     <input
                                                         id="phone"
+                                                        name="phone"
                                                         type="tel"
                                                         required
                                                         className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
@@ -271,6 +316,7 @@ export default function AdmissionsPage() {
                                                 <label htmlFor="message" className="text-sm font-bold text-foreground/80">Message / Queries</label>
                                                 <textarea
                                                     id="message"
+                                                    name="message"
                                                     rows={4}
                                                     className="w-full px-4 py-3 bg-muted/20 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all resize-none"
                                                     placeholder="Any specific questions regarding transportation, fees, etc."
@@ -310,9 +356,9 @@ export default function AdmissionsPage() {
                                 <Phone className="h-5 w-5" />
                                 <span className="font-bold">+91 94474 38221</span>
                             </a>
-                            <a href="mailto:littlelillikbl@gmail.com" className="flex items-center gap-3 bg-white/10 px-5 py-3 rounded-full hover:bg-white hover:text-primary transition-colors">
+                            <a href="mailto:LLSKSD@gmail.com" className="flex items-center gap-3 bg-white/10 px-5 py-3 rounded-full hover:bg-white hover:text-primary transition-colors">
                                 <Mail className="h-5 w-5" />
-                                <span className="font-bold">littlelillikbl@gmail.com</span>
+                                <span className="font-bold">LLSKSD@gmail.com</span>
                             </a>
                         </div>
                     </div>
