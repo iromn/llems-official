@@ -1,6 +1,9 @@
 "use client";
 
-import { FileText, Download, Users } from "lucide-react";
+import { FileText, Download, Users, Building2 } from "lucide-react";
+import { getImagePath } from "@/lib/paths";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function MandatoryDisclosurePage() {
     const generalInfo = [
@@ -9,8 +12,8 @@ export default function MandatoryDisclosurePage() {
         { label: "School Code", value: "76313" },
         { label: "Complete Address", value: "Kumbla, Kasaragod, Kerala, 671321" },
         { label: "Principal Name & Qualification", value: "Dr. Vishnudas Ramaswamy, M.Tech, Ph.D" },
-        { label: "School Email ID", value: "info@littlelilli.edu.in" },
-        { label: "Contact Details", value: "04998 213456" }
+        { label: "School Email ID", value: "LLSKSD@gmail.com" },
+        { label: "Contact Details", value: "04998 215306" }
     ];
 
     const documents = [
@@ -51,31 +54,63 @@ export default function MandatoryDisclosurePage() {
     ];
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <section className="bg-primary text-primary-foreground py-16 text-center">
-                <div className="container px-4 mx-auto">
-                    <h1 className="font-serif text-3xl md:text-4xl font-bold mb-4">Mandatory Disclosure</h1>
-                    <p className="opacity-90 max-w-2xl mx-auto">
-                        Information for the public as per the CBSE requirement.
-                    </p>
+        <div className="flex flex-col min-h-screen font-sans bg-background">
+            {/* Hero Section */}
+            <section className="relative w-full h-[500px] flex items-center justify-center bg-primary text-primary-foreground overflow-hidden">
+                {/* Background Image Layer */}
+                {/* Background Image Layer */}
+                <div className="absolute inset-0 w-full h-full z-0">
+                    <Image
+                        src={getImagePath('/images/facilities/library.jpg')}
+                        alt="Mandatory Disclosure Hero"
+                        fill
+                        priority
+                        className="object-cover object-center scale-105"
+                    />
                 </div>
+                {/* Overlay Layer */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-primary/90 z-0" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="container relative z-10 px-4 text-center"
+                >
+                    <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 text-secondary border border-secondary/30 text-sm font-bold uppercase tracking-wider mb-6 backdrop-blur-sm">
+                        Official Information
+                    </span>
+                    <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg">
+                        Mandatory Disclosure
+                    </h1>
+                    <div className="h-1.5 w-24 bg-secondary mx-auto rounded-full mb-8" />
+                    <p className="text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
+                        Official information as per CBSE requirements for transparency and compliance.
+                    </p>
+                </motion.div>
             </section>
 
-            <section className="py-16">
-                <div className="container px-4 md:px-6 mx-auto max-w-4xl">
+            <section className="py-24">
+                <div className="container px-4 md:px-6 mx-auto max-w-5xl space-y-16">
 
                     {/* General Information */}
-                    <div className="mb-12">
-                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 border-b pb-2">
-                            <FileText className="text-secondary" /> General Information
-                        </h2>
-                        <div className="bg-card border border-border rounded-lg overflow-hidden">
+                    <div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-12 w-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                                <FileText className="h-6 w-6 text-secondary" />
+                            </div>
+                            <div>
+                                <h2 className="font-serif text-3xl font-bold text-primary">General Information</h2>
+                                <div className="h-1 w-16 bg-secondary/40 rounded-full mt-1" />
+                            </div>
+                        </div>
+                        <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm">
                             <table className="w-full text-sm md:text-base">
                                 <tbody>
                                     {generalInfo.map((item, index) => (
-                                        <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
-                                            <td className="p-4 font-semibold text-muted-foreground w-1/3 md:w-1/4">{item.label}</td>
-                                            <td className="p-4 font-medium">{item.value}</td>
+                                        <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
+                                            <td className="p-5 font-bold text-foreground/70 w-2/5">{item.label}</td>
+                                            <td className="p-5 font-medium text-foreground">{item.value}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -84,19 +119,25 @@ export default function MandatoryDisclosurePage() {
                     </div>
 
                     {/* Documents */}
-                    <div className="mb-12">
-                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 border-b pb-2">
-                            <Download className="text-secondary" /> Documents & Information
-                        </h2>
+                    <div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-12 w-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                                <Download className="h-6 w-6 text-secondary" />
+                            </div>
+                            <div>
+                                <h2 className="font-serif text-3xl font-bold text-primary">Documents & Information</h2>
+                                <div className="h-1 w-16 bg-secondary/40 rounded-full mt-1" />
+                            </div>
+                        </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {documents.map((doc, index) => (
                                 <a
                                     key={index}
                                     href={doc.link}
-                                    className="flex items-center justify-between p-4 bg-card border border-border rounded-lg hover:border-primary hover:shadow-md transition-all group"
+                                    className="flex items-center justify-between p-5 bg-white border border-border rounded-xl hover:border-secondary hover:shadow-lg transition-all group"
                                 >
-                                    <span className="font-medium group-hover:text-primary transition-colors">{doc.label}</span>
-                                    <div className="bg-secondary/10 p-2 rounded-full group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
+                                    <span className="font-semibold text-foreground group-hover:text-secondary transition-colors">{doc.label}</span>
+                                    <div className="bg-secondary/10 p-2.5 rounded-full group-hover:bg-secondary group-hover:text-white transition-all">
                                         <Download className="h-4 w-4" />
                                     </div>
                                 </a>
@@ -105,17 +146,23 @@ export default function MandatoryDisclosurePage() {
                     </div>
 
                     {/* Staff */}
-                    <div className="mb-12">
-                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 border-b pb-2">
-                            <Users className="text-secondary" /> Staff Details
-                        </h2>
-                        <div className="bg-card border border-border rounded-lg overflow-hidden">
+                    <div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-12 w-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                                <Users className="h-6 w-6 text-secondary" />
+                            </div>
+                            <div>
+                                <h2 className="font-serif text-3xl font-bold text-primary">Staff Details</h2>
+                                <div className="h-1 w-16 bg-secondary/40 rounded-full mt-1" />
+                            </div>
+                        </div>
+                        <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm">
                             <table className="w-full text-sm md:text-base">
                                 <tbody>
                                     {staff.map((item, index) => (
-                                        <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
-                                            <td className="p-4 font-semibold text-muted-foreground w-1/3 md:w-1/4">{item.label}</td>
-                                            <td className="p-4 font-medium">{item.value}</td>
+                                        <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
+                                            <td className="p-5 font-bold text-foreground/70 w-2/5">{item.label}</td>
+                                            <td className="p-5 font-medium text-foreground">{item.value}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -124,17 +171,23 @@ export default function MandatoryDisclosurePage() {
                     </div>
 
                     {/* Infrastructure */}
-                    <div className="mb-12">
-                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 border-b pb-2">
-                            <FileText className="text-secondary" /> Infrastructure Details
-                        </h2>
-                        <div className="bg-card border border-border rounded-lg overflow-hidden">
+                    <div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-12 w-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                                <Building2 className="h-6 w-6 text-secondary" />
+                            </div>
+                            <div>
+                                <h2 className="font-serif text-3xl font-bold text-primary">Infrastructure Details</h2>
+                                <div className="h-1 w-16 bg-secondary/40 rounded-full mt-1" />
+                            </div>
+                        </div>
+                        <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm">
                             <table className="w-full text-sm md:text-base">
                                 <tbody>
                                     {infrastructure.map((item, index) => (
-                                        <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
-                                            <td className="p-4 font-semibold text-muted-foreground w-1/3 md:w-1/4">{item.label}</td>
-                                            <td className="p-4 font-medium">{item.value}</td>
+                                        <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
+                                            <td className="p-5 font-bold text-foreground/70 w-2/5">{item.label}</td>
+                                            <td className="p-5 font-medium text-foreground">{item.value}</td>
                                         </tr>
                                     ))}
                                 </tbody>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { getImagePath } from "@/lib/paths";
 import { ChevronDown } from "lucide-react";
 
@@ -78,13 +79,38 @@ export default function GalleryPage() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
-            <section className="bg-muted py-12 md:py-20 text-center">
-                <div className="container px-4 mx-auto">
-                    <h1 className="font-serif text-4xl font-bold mb-4 text-primary">Photo & Video Gallery</h1>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
+            <section className="relative w-full h-[500px] flex items-center justify-center bg-primary text-primary-foreground overflow-hidden">
+                {/* Background Image Layer */}
+                {/* Background Image Layer */}
+                <div className="absolute inset-0 w-full h-full z-0">
+                    <Image
+                        src={getImagePath('/images/hero/slide-1.jpg')}
+                        alt="Gallery Hero"
+                        fill
+                        priority
+                        className="object-cover object-center scale-105"
+                    />
+                </div>
+                {/* Overlay Layer */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-primary/90 z-0" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="container relative z-10 px-4 text-center"
+                >
+                    <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 text-secondary border border-secondary/30 text-sm font-bold uppercase tracking-wider mb-6 backdrop-blur-sm">
+                        Memories
+                    </span>
+                    <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg">
+                        Photo & Video Gallery
+                    </h1>
+                    <div className="h-1.5 w-24 bg-secondary mx-auto rounded-full mb-8" />
+                    <p className="text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
                         Glimpses of life at Little Lilli English Medium School. From classroom activities to vibrant cultural festivities.
                     </p>
-                </div>
+                </motion.div>
             </section>
 
             {/* Filter Tabs */}
@@ -133,10 +159,15 @@ export default function GalleryPage() {
                                         </div>
                                     ) : (
                                         <>
-                                            <div
-                                                className="w-full h-full bg-cover bg-top group-hover:scale-110 transition-transform duration-500"
-                                                style={{ backgroundImage: `url(${item.src})` }}
-                                            />
+                                            <div className="relative w-full h-full">
+                                                <Image
+                                                    src={item.src}
+                                                    alt={item.title}
+                                                    fill
+                                                    className="object-cover object-top group-hover:scale-110 transition-transform duration-500"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                />
+                                            </div>
                                             <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                                 <p className="text-white font-medium">{item.title}</p>
                                             </div>
